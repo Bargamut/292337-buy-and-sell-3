@@ -16,3 +16,8 @@ const shuffle = (someArray) => {
 
   return someArray;
 };
+
+module.exports = {
+  getRandomInt,
+  shuffle,
+};
