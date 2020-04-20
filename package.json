@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Bargamut/292337-buy-and-sell-3#readme",
   "devDependencies": {
-    "eslint": "6.8.0"
+    "eslint": "6.8.0",
+    "eslint-config-htmlacademy": "0.5.2"
   }
 }
