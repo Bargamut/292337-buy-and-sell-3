@@ -17,7 +17,10 @@ const shuffle = (someArray) => {
   return someArray;
 };
 
+const addZero = (num) => num > 0 && num < 10 ? `0${num}` : num;
+
 module.exports = {
   getRandomInt,
   shuffle,
+  addZero,
 };
