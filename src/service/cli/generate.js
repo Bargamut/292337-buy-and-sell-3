@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require(`fs`);
 const {
   getRandomInt,
   shuffle,
@@ -64,11 +65,23 @@ const generateOffers = (count) => {
   }));
 };
 
+const saveToMocks = (content) => {
+  fs.writeFile(FILE_NAME, content, (err) => {
+    if (err) {
+      return console.error(`Can't write data to file...`);
+    }
+
+    return console.info(`Operation success. File created.`);
+  });
+};
+
 module.exports = {
   name: `--generate`,
   run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(generateOffers(countOffer));
+
+    saveToMocks(content);
   }
 };
