@@ -3,7 +3,7 @@
 const {
   getRandomInt,
   shuffle,
-} = require('../../utils');
+} = require(`../../utils`);
 
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
@@ -24,7 +24,7 @@ const SENTENCES = [
   `Продаю с болью в сердце...`,
   `Бонусом отдам все аксессуары.`,
   `Даю недельную гарантию.`,
-  `Если товар не понравится — верну всё до последней `,`копейки.`,
+  `Если товар не понравится — верну всё до последней копейки.`,
   `Это настоящая находка для коллекционера!`,
   `Если найдёте дешевле — сброшу цену.`,
   `Таких предложений больше нет!`,
@@ -66,7 +66,9 @@ const generateOffers = (count) => {
 
 module.exports = {
   name: `--generate`,
-  run() {
-
+  run(args) {
+    const [count] = args;
+    const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+    const content = JSON.stringify(generateOffers(countOffer));
   }
 };
