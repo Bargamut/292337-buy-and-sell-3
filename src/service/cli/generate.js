@@ -59,24 +59,39 @@ const PictureRestrict = {
   max: 16,
 };
 
-const getPictureFileName = (imgIndex) => {
+const getPictureFileName = () => {
+  const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
+
   return `item${addZero(imgIndex)}.jpg`;
 };
 
 const getCategories = () => {
   return Array(getRandomInt(1, CATEGORIES.length))
-    .fill(``)
+    .fill()
     .map(() => CATEGORIES[getRandomInt(0, CATEGORIES.length - 1)]);
 };
 
+const getDescription = () => shuffle(SENTENCES).slice(1, 5).join(` `);
+
+const getTitle = () => TITLES[getRandomInt(0, TITLES.length - 1)];
+
+const getOfferType = () => {
+  const typeValues = Object.values(OfferType);
+  const typeIndex = getRandomInt(0, Object.keys(OfferType).length - 1);
+
+  return typeValues[typeIndex];
+};
+
+const getOfferSum = () => getRandomInt(SumRestrict.min, SumRestrict.max);
+
 const generateOffers = (count) => {
-  return Array(count).fill({}).map(() => ({
+  return Array(count).fill().map(() => ({
     category: getCategories(),
-    description: shuffle(SENTENCES).slice(1, 5).join(` `),
-    picture: getPictureFileName(getRandomInt(PictureRestrict.min, PictureRestrict.max)),
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
-    type: Object.keys(OfferType)[Math.floor(Math.random() * Object.keys(OfferType).length)],
-    sum: getRandomInt(SumRestrict.min, SumRestrict.max),
+    description: getDescription(),
+    picture: getPictureFileName(),
+    title: getTitle(),
+    type: getOfferType(),
+    sum: getOfferSum(),
   }));
 };
 
