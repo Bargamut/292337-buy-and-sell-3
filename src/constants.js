@@ -3,7 +3,7 @@
 const DEFAULT_COMMAND = `--help`;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
-  ssuccess: 0,
+  success: 0,
   error: 1
 };
 
