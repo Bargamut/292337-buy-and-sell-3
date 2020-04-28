@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require(`fs`);
+const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
 const {
   getRandomInt,
@@ -96,18 +96,18 @@ const generateOffers = (count) => {
   }));
 };
 
-const saveToMocks = (content) => {
-  fs.writeFile(FILE_NAME, content, (err) => {
-    if (err) {
-      return console.error(
-          chalk.red(`Can't write data to file...`)
-      );
-    }
+const saveToMocks = async (content) => {
+  try {
+    await fs.writeFile(FILE_NAME, content);
 
-    return console.info(
+    console.info(
         chalk.green(`Operation success. File created.`)
     );
-  });
+  } catch (error) {
+    console.error(
+        chalk.red(`Can't write data to file...`)
+    );
+  }
 };
 
 module.exports = {
