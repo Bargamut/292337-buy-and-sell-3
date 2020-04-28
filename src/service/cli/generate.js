@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require(`fs`);
+const chalk = require(`chalk`);
 const {
   getRandomInt,
   shuffle,
@@ -98,10 +99,14 @@ const generateOffers = (count) => {
 const saveToMocks = (content) => {
   fs.writeFile(FILE_NAME, content, (err) => {
     if (err) {
-      return console.error(`Can't write data to file...`);
+      return console.error(
+          chalk.red(`Can't write data to file...`)
+      );
     }
 
-    return console.info(`Operation success. File created.`);
+    return console.info(
+        chalk.green(`Operation success. File created.`)
+    );
   });
 };
 
