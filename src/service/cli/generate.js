@@ -11,7 +11,7 @@ const {
 const DEFAULT_COUNT = 1;
 const FILE_NAME = `mocks.json`;
 const FILE_TITLES_PATH = `./data/titles.txt`;
-const FILE_SENTENCES_PATH = `./data/setences.txt`;
+const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 
 const OfferType = {
@@ -80,24 +80,26 @@ const saveToMocks = async (content) => {
 const readContent = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
+
     return content.split(`\n`);
   } catch (err) {
     console.error(
         chalk.red(err)
     );
+
     return [];
   }
 };
 
 module.exports = {
   name: `--generate`,
-  run(args) {
+  async run(args) {
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
 
-    const titles = readContent(FILE_TITLES_PATH);
-    const categories = readContent(FILE_CATEGORIES_PATH);
-    const sentences = readContent(FILE_SENTENCES_PATH);
+    const titles = await readContent(FILE_TITLES_PATH);
+    const categories = await readContent(FILE_CATEGORIES_PATH);
+    const sentences = await readContent(FILE_SENTENCES_PATH);
 
     const content = JSON.stringify(
         generateOffers(
