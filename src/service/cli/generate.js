@@ -81,7 +81,7 @@ const readContent = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
 
-    return content.split(`\n`);
+    return content.split(`\n`).filter((value) => value !== ``);
   } catch (err) {
     console.error(
         chalk.red(err)
