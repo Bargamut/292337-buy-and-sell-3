@@ -2,10 +2,18 @@
 
 const express = require(`express`);
 
-const PORT = 8080;
+const mainRouter = require(`./routes/main-routes`);
+const myRouter = require(`./routes/my-routes`);
+const offersRouter = require(`./routes/offers-routes`);
+
+const DEFAULT_PORT = 8080;
 
 const app = express();
 
-app.listen(PORT, () => {
-  console.log(`Сервер стартовал на http://localhost:${PORT}`);
+app.use(`/`, mainRouter);
+app.use(`/my`, myRouter);
+app.use(`/offers`, offersRouter);
+
+app.listen(DEFAULT_PORT, () => {
+  console.log(`Сервер стартовал на http://localhost:${DEFAULT_PORT}`);
 });
