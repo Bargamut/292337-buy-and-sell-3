@@ -18,13 +18,19 @@ app.use(express.json());
 app.get(`/offers`, async (req, res) => {
   try {
     const fileContent = await fs.readFile(FILENAME);
-    const mocks = JSON.parse(fileContent);
+    const mocks = fileContent.length > 0
+      ? JSON.parse(fileContent)
+      : [];
 
     res.json(mocks);
   } catch (error) {
-    res
-      .status(HttpCode.INTERNAL_SERVER_ERROR)
-      .send(error);
+    if (error.code === `ENOENT`) {
+      res.json([]);
+    } else {
+      res
+        .status(HttpCode.INTERNAL_SERVER_ERROR)
+        .send(error);
+    }
   }
 });
 
