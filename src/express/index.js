@@ -13,7 +13,7 @@ const DEFAULT_PORT = 8080;
 const app = express();
 
 // Шаблонизация
-app.set(`views`, `./templates`);
+app.set(`views`, path.resolve(__dirname, `./templates`));
 app.set(`view engine`, `pug`);
 
 // middleware: Отдача статики с помощью
