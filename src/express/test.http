@@ -1,0 +1,20 @@
+GET http://localhost:8080/ HTTP/1.1
+###
+GET http://localhost:8080/register HTTP/1.1
+###
+GET http://localhost:8080/login HTTP/1.1
+###
+GET http://localhost:8080/search HTTP/1.1
+###
+GET http://localhost:8080/my/ HTTP/1.1
+###
+GET http://localhost:8080/my/comments HTTP/1.1
+###
+GET http://localhost:8080/offers/add HTTP/1.1
+###
+GET http://localhost:8080/offers/1 HTTP/1.1
+###
+GET http://localhost:8080/offers/edit/1 HTTP/1.1
+###
+GET http://localhost:8080/offers/category/1 HTTP/1.1
+###
