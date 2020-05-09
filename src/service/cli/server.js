@@ -1,7 +1,9 @@
 'use strict';
 
 const fs = require(`fs`).promises;
+const express = require(`express`);
 const chalk = require(`chalk`);
+
 const {
   HttpCode,
 } = require(`../../constants`);
@@ -9,30 +11,27 @@ const {
 const DEFAULT_PORT = 3000;
 const FILENAME = `mocks.json`;
 
+const app = express();
 
-const onClientConect = async (req, res) => {
-  const notFoundMessageText = `Not found`;
+app.use(express.json());
 
-  switch (req.url) {
-    case `/`:
-      try {
-        const fileContent = await fs.readFile(FILENAME);
-        const mocks = JSON.parse(fileContent);
-        const message = mocks
-          .map((post) => `<li>${post.title}</li>`)
-          .join(` `);
+app.get(`/offers`, async (req, res) => {
+  try {
+    const fileContent = await fs.readFile(FILENAME);
+    const mocks = JSON.parse(fileContent);
 
-        sendResponse(res, HttpCode.OK, `<ul>${message}</ul>`);
-      } catch (error) {
-        sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
-      }
-      break;
-
-    default:
-      sendResponse(res, HttpCode.NOT_FOUND, notFoundMessageText);
-      break;
+    res.json(mocks);
+  } catch (error) {
+    res
+      .status(HttpCode.INTERNAL_SERVER_ERROR)
+      .send(error);
   }
-};
+});
+
+app.use((req, res) => res
+  .status(HttpCode.NOT_FOUND)
+  .send(`Not Found`)
+);
 
 module.exports = {
   name: `--server`,
@@ -40,6 +39,10 @@ module.exports = {
     const [customPort] = args;
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
 
-    createServer(port);
+    app.listen(port, () => {
+      console.log(
+          chalk.green(`Сервер сартовал на http://localhost:${port}`)
+      );
+    });
   },
 };
