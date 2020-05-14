@@ -17,10 +17,10 @@ module.exports = (req, res, next) => {
   const keysExist = offerKeys.every((key) => keys.includes(key));
 
   if (!keysExist) {
-    res
+    return res
       .status(HttpCode.BAD_REQUEST)
       .send(`Bad Request`);
   }
 
-  next();
+  return next();
 };
