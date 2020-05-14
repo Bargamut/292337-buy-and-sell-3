@@ -10,6 +10,7 @@ const category = require(`./category`);
 const {
   CategoryService,
   OfferService,
+  CommentService,
 } = require(`../data-service`);
 
 
@@ -19,7 +20,7 @@ const router = new Router();
   const mockData = await getMockData();
 
   category(router, new CategoryService(mockData));
-  offer(router, new OfferService(mockData) /* , new CommentService()*/);
+  offer(router, new OfferService(mockData), new CommentService());
 })();
 
 module.exports = router;
