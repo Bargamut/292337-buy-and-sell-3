@@ -13,6 +13,8 @@ const HttpCode = {
   NOT_FOUND: 404,
   INTERNAL_SERVER_ERROR: 500,
 };
+const API_PREFIX_PATH = `/api`;
+
 const MOCK_DEFAULT_COUNT = 1;
 const MOCK_MAX_ID_LENGTH = 6;
 const MOCK_MAX_COMMENTS = 7;
@@ -27,6 +29,7 @@ module.exports = {
   USER_ARGV_INDEX,
   ExitCode,
   HttpCode,
+  API_PREFIX_PATH,
   MOCK_DEFAULT_COUNT,
   MOCK_MAX_ID_LENGTH,
   MOCK_MAX_COMMENTS,
