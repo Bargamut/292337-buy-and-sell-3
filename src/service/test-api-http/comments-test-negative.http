@@ -1,0 +1,33 @@
+GET /api/offers/123/comments HTTP/1.1
+Host: localhost:3000
+
+###
+
+POST /api/offers/8-ISnn/comments HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "id": "test-comment",
+  "name": "Тест некорректного создания комментария."
+}
+
+###
+
+PUT /api/offers/8-ISnn/comments/test-comment HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+
+{
+  "name": "Тест некорректного обновления комментария."
+}
+
+###
+
+DELETE /api/offers/123/comments/test-comment HTTP/1.1
+Host: localhost:3000
+
+###
+
+DELETE /api/offers/8-ISnn/comments/test-comment HTTP/1.1
+Host: localhost:3000
