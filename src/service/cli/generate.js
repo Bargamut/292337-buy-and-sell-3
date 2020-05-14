@@ -2,17 +2,21 @@
 
 const fs = require(`fs`).promises;
 const chalk = require(`chalk`);
+const {nanoid} = require(`nanoid`);
+
 const {
   getRandomInt,
   shuffle,
   addZero,
 } = require(`../../utils`);
-
-const DEFAULT_COUNT = 1;
-const FILE_NAME = `mocks.json`;
-const FILE_TITLES_PATH = `./data/titles.txt`;
-const FILE_SENTENCES_PATH = `./data/sentences.txt`;
-const FILE_CATEGORIES_PATH = `./data/categories.txt`;
+const {
+  MAX_ID_LENGTH,
+  DEFAULT_COUNT,
+  FILE_NAME,
+  FILE_TITLES_PATH,
+  FILE_SENTENCES_PATH,
+  FILE_CATEGORIES_PATH,
+} = require(`../../constants`);
 
 const OfferType = {
   offer: `offer`,
@@ -26,6 +30,8 @@ const PictureRestrict = {
   min: 1,
   max: 16,
 };
+
+const getUniqId = () => nanoid(MAX_ID_LENGTH);
 
 const getPictureFileName = () => {
   const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
@@ -54,6 +60,7 @@ const getOfferSum = () => getRandomInt(SumRestrict.min, SumRestrict.max);
 
 const generateOffers = (count, titles, categories, setences) => {
   return Array(count).fill().map(() => ({
+    id: getUniqId(),
     category: getCategories(categories),
     description: getDescription(setences),
     picture: getPictureFileName(),
