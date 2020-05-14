@@ -10,12 +10,14 @@ const {
   addZero,
 } = require(`../../utils`);
 const {
-  MAX_ID_LENGTH,
-  DEFAULT_COUNT,
-  FILE_NAME,
-  FILE_TITLES_PATH,
-  FILE_SENTENCES_PATH,
-  FILE_CATEGORIES_PATH,
+  MOCK_DEFAULT_COUNT,
+  MOCK_MAX_ID_LENGTH,
+  MOCK_MAX_COMMENTS,
+  MOCK_FILE_NAME,
+  MOCK_FILE_TITLES_PATH,
+  MOCK_FILE_SENTENCES_PATH,
+  MOCK_FILE_CATEGORIES_PATH,
+  MOCK_FILE_COMMENTS_PATH,
 } = require(`../../constants`);
 
 const OfferType = {
@@ -31,7 +33,7 @@ const PictureRestrict = {
   max: 16,
 };
 
-const getUniqId = () => nanoid(MAX_ID_LENGTH);
+const getUniqId = () => nanoid(MOCK_MAX_ID_LENGTH);
 
 const getPictureFileName = () => {
   const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
@@ -58,7 +60,16 @@ const getOfferType = () => {
 
 const getOfferSum = () => getRandomInt(SumRestrict.min, SumRestrict.max);
 
-const generateOffers = (count, titles, categories, setences) => {
+const generateComments = (count, comments) => (
+  Array(count).fill().map(() => ({
+    id: nanoid(MOCK_MAX_ID_LENGTH),
+    text: shuffle(comments)
+      .slice(0, getRandomInt(1, 3))
+      .join(` `),
+  }))
+);
+
+const generateOffers = (count, titles, categories, setences, comments) => {
   return Array(count).fill().map(() => ({
     id: getUniqId(),
     category: getCategories(categories),
@@ -67,12 +78,13 @@ const generateOffers = (count, titles, categories, setences) => {
     title: getTitle(titles),
     type: getOfferType(),
     sum: getOfferSum(),
+    comments: generateComments(getRandomInt(1, MOCK_MAX_COMMENTS), comments),
   }));
 };
 
 const saveToMocks = async (content) => {
   try {
-    await fs.writeFile(FILE_NAME, content);
+    await fs.writeFile(MOCK_FILE_NAME, content);
 
     console.info(
         chalk.green(`Operation success. File created.`)
@@ -102,18 +114,20 @@ module.exports = {
   name: `--generate`,
   async run(args) {
     const [count] = args;
-    const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
+    const countOffer = Number.parseInt(count, 10) || MOCK_DEFAULT_COUNT;
 
-    const titles = await readContent(FILE_TITLES_PATH);
-    const categories = await readContent(FILE_CATEGORIES_PATH);
-    const sentences = await readContent(FILE_SENTENCES_PATH);
+    const titles = await readContent(MOCK_FILE_TITLES_PATH);
+    const categories = await readContent(MOCK_FILE_CATEGORIES_PATH);
+    const sentences = await readContent(MOCK_FILE_SENTENCES_PATH);
+    const comments = await readContent(MOCK_FILE_COMMENTS_PATH);
 
     const content = JSON.stringify(
         generateOffers(
             countOffer,
             titles,
             categories,
-            sentences
+            sentences,
+            comments
         )
     );
 
