@@ -17,9 +17,9 @@ const HttpCode = {
   INTERNAL_SERVER_ERROR: 500,
 };
 const API_PREFIX_PATH = `/api`;
+const MAX_ID_LENGTH = 6;
 
 const MOCK_DEFAULT_COUNT = 1;
-const MOCK_MAX_ID_LENGTH = 6;
 const MOCK_MAX_COMMENTS = 7;
 const MOCK_FILE_NAME = `mocks.json`;
 const MOCK_FILE_TITLES_PATH = `./data/titles.txt`;
@@ -34,8 +34,8 @@ module.exports = {
   ExitCode,
   HttpCode,
   API_PREFIX_PATH,
+  MAX_ID_LENGTH,
   MOCK_DEFAULT_COUNT,
-  MOCK_MAX_ID_LENGTH,
   MOCK_MAX_COMMENTS,
   MOCK_FILE_NAME,
   MOCK_FILE_TITLES_PATH,

@@ -10,8 +10,8 @@ const {
   addZero,
 } = require(`../../utils`);
 const {
+  MAX_ID_LENGTH,
   MOCK_DEFAULT_COUNT,
-  MOCK_MAX_ID_LENGTH,
   MOCK_MAX_COMMENTS,
   MOCK_FILE_NAME,
   MOCK_FILE_TITLES_PATH,
@@ -33,7 +33,7 @@ const PictureRestrict = {
   max: 16,
 };
 
-const getUniqId = () => nanoid(MOCK_MAX_ID_LENGTH);
+const getUniqId = () => nanoid(MAX_ID_LENGTH);
 
 const getPictureFileName = () => {
   const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
@@ -62,7 +62,7 @@ const getOfferSum = () => getRandomInt(SumRestrict.min, SumRestrict.max);
 
 const generateComments = (count, comments) => (
   Array(count).fill().map(() => ({
-    id: nanoid(MOCK_MAX_ID_LENGTH),
+    id: nanoid(MAX_ID_LENGTH),
     text: shuffle(comments)
       .slice(0, getRandomInt(1, 3))
       .join(` `),
