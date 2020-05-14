@@ -1,6 +1,7 @@
 'use strict';
 
 const DEFAULT_COMMAND = `--help`;
+const SERVICE_DEFAULT_PORT = 3000;
 const USER_ARGV_INDEX = 2;
 const ExitCode = {
   success: 0,
@@ -28,6 +29,7 @@ const MOCK_FILE_COMMENTS_PATH = `./data/comments.txt`;
 
 module.exports = {
   DEFAULT_COMMAND,
+  SERVICE_DEFAULT_PORT,
   USER_ARGV_INDEX,
   ExitCode,
   HttpCode,
