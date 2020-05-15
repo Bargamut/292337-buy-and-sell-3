@@ -11,14 +11,15 @@ const {
 } = require(`../../utils`);
 const {
   MAX_ID_LENGTH,
-  MOCK_DEFAULT_COUNT,
-  MOCK_MAX_COMMENTS,
   MOCK_FILE_NAME,
-  MOCK_FILE_TITLES_PATH,
-  MOCK_FILE_SENTENCES_PATH,
-  MOCK_FILE_CATEGORIES_PATH,
-  MOCK_FILE_COMMENTS_PATH,
 } = require(`../../constants`);
+
+const MOCK_DEFAULT_COUNT = 1;
+const MOCK_MAX_COMMENTS = 7;
+const MOCK_FILE_TITLES_PATH = `./data/titles.txt`;
+const MOCK_FILE_SENTENCES_PATH = `./data/sentences.txt`;
+const MOCK_FILE_CATEGORIES_PATH = `./data/categories.txt`;
+const MOCK_FILE_COMMENTS_PATH = `./data/comments.txt`;
 
 const OfferType = {
   offer: `offer`,
