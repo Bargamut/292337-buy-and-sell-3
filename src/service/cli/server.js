@@ -7,8 +7,8 @@ const routes = require(`../api`);
 const {
   HttpCode,
   API_PREFIX_PATH,
-  SERVICE_DEFAULT_PORT: DEFAULT_PORT,
 } = require(`../../constants`);
+const DEFAULT_PORT = 3000;
 
 const app = express();
 
