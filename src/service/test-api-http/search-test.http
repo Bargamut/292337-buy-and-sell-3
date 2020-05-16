@@ -1,0 +1,17 @@
+GET /api/search?query= HTTP/1.1
+Host: localhost:3000
+
+###
+
+GET /api/search?query=123 HTTP/1.1
+Host: localhost:3000
+
+###
+
+GET /api/search?query=нов HTTP/1.1
+Host: localhost:3000
+
+###
+
+GET /api/search?query=отлич HTTP/1.1
+Host: localhost:3000
