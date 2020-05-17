@@ -4,7 +4,8 @@
   "description": "Куплю. Продам",
   "main": "./src/service/service.js",
   "scripts": {
-    "test": "npm run eslint",
+    "test": "npm run eslint && npm run test::rest",
+    "test::rest": "jest --rootDir=src/service/",
     "eslint": "eslint --ext .js src/",
     "start": "node ./src/service/service.js",
     "server": "nodemon ./src/service/service.js --server",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/Bargamut/292337-buy-and-sell-3#readme",
   "devDependencies": {
+    "@types/jest": "25.2.2",
     "eslint": "6.8.0",
     "eslint-config-htmlacademy": "0.5.2",
     "jest": "26.0.1",
