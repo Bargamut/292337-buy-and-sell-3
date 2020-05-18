@@ -52,7 +52,7 @@ module.exports = {
         logger.info(`Server start succes on http://localhost:${port}`);
       })
       .on(`error`, (error) => {
-        logger.error(`Server start fail wit error^ ${error}`);
+        logger.error(`Server start fail! ${error}`);
       });
   },
   app,
