@@ -3,9 +3,7 @@
 const express = require(`express`);
 const path = require(`path`);
 
-const mainRouter = require(`./routes/main-routes`);
-const myRouter = require(`./routes/my-routes`);
-const offersRouter = require(`./routes/offers-routes`);
+const router = require(`./routes`);
 
 const PUBLIC_DIR = `public`;
 const DEFAULT_PORT = 8080;
@@ -24,9 +22,7 @@ app.use(
 );
 
 // Роутеры
-app.use(`/`, mainRouter);
-app.use(`/my`, myRouter);
-app.use(`/offers`, offersRouter);
+app.use(`/`, router);
 
 app.listen(DEFAULT_PORT, () => {
   console.log(`Сервер стартовал на http://localhost:${DEFAULT_PORT}`);
