@@ -14,7 +14,7 @@ const router = new Router();
 const url = `http://localhost:3000`;
 
 const offerDataService = new OfferDataService(url);
-const commentDataService = new CommentDataService();
+const commentDataService = new CommentDataService(url);
 
 mainRouter(router, offerDataService);
 offersRouter(router, offerDataService);

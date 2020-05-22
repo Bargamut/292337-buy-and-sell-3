@@ -1,22 +1,26 @@
 'use strict';
 
+const request = require(`request-promise-native`);
+
 class CommentDataService {
+  constructor(baseUrl) {
+    this._baseUrl = baseUrl;
+  }
+
   set offerDataService(service) {
     this._offerDataService = service;
   }
 
-  async findAll(offers) {
-    if (!offers) {
-      return [];
-    }
+  async findAll(offers = []) {
+    const promises = offers.map(async (offer) => {
+      return await request(`${this._baseUrl}/api/offers/${offer.id}/comments`, {json: true});
+    });
 
-    const comments = offers.reduce((acc, offer) => {
-      acc.add(offer.comments);
+    return await Promise.all(promises);
+  }
 
-      return acc;
-    }, new Set());
-
-    return comments;
+  async findFor(offerId) {
+    return await request(`${this._baseUrl}/api/offers/${offerId}/comments`, {json: true});
   }
 }
 
