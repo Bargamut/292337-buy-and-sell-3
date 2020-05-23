@@ -10,7 +10,18 @@ module.exports = (parentRouter, offerDataService) => {
   mainRouter.get(`/`, async (req, res) => {
     const offers = await offerDataService.findAll();
 
-    res.render(`main`, offers);
+    const newestOffers = [...offers].sort((a, b) => b.date - a.date);
+    const mostCommentedOffers = [...offers].sort((a, b) => b.comments.length - a.comments.length);
+
+    if (newestOffers.length > 8) {
+      newestOffers.length = 8;
+    }
+
+    if (mostCommentedOffers.length > 8) {
+      mostCommentedOffers.length = 8;
+    }
+
+    res.render(`main`, {newestOffers, mostCommentedOffers});
   });
   mainRouter.get(`/register`, (req, res) => res.render(`sign-up`));
   mainRouter.get(`/login`, (req, res) => res.render(`login`));
