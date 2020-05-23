@@ -1,0 +1,9 @@
+mixin ticketList(blockHeader, blockTitle, offers)
+  section.tickets-list
+    h2.visually-hidden #{blockHeader}
+    .tickets-list__wrapper
+      .tickets-list__header
+        p.tickets-list__title #{blockTitle}
+      ul
+        each offer in offers
+          include ../partials/ticket-card.pug
