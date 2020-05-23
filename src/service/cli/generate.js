@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require(`fs`).promises;
+const {DateTime} = require(`luxon`);
 const chalk = require(`chalk`);
 const {nanoid} = require(`nanoid`);
 
@@ -36,6 +37,16 @@ const PictureRestrict = {
 
 const getUniqId = () => nanoid(MAX_ID_LENGTH);
 
+const getItemCreatedDate = () => {
+  const maxTimestamp = Date.now();
+  const minTimestamp = DateTime.local().minus({months: 3}).toMillis();
+
+  return getRandomInt(minTimestamp, maxTimestamp);
+  // return DateTime
+  //   .fromMillis(getRandomInt(minTimestamp, maxTimestamp))
+  //   .toFormat(`yyyy-MM-dd HH:mm:ss`);
+};
+
 const getPictureFileName = () => {
   const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
 
@@ -61,9 +72,31 @@ const getOfferType = () => {
 
 const getOfferSum = () => getRandomInt(SumRestrict.min, SumRestrict.max);
 
+const getAvatarFileName = () => {
+  const imgIndex = getRandomInt(PictureRestrict.min, PictureRestrict.max);
+
+  return `avatar${addZero(imgIndex)}.jpg`;
+};
+
+const generateAvatar = () => {
+  const authorNames = [
+    `Александр Бурый`,
+    `Иван Таранов`,
+    `Парад Дебилов`,
+    `Склад Самоваров`,
+    `Мятеж Комаров`,
+  ];
+
+  return authorNames[getRandomInt(0, authorNames.length)];
+};
+
 const generateComments = (count, comments) => (
   Array(count).fill().map(() => ({
     id: nanoid(MAX_ID_LENGTH),
+    author: {
+      avatar: getAvatarFileName(),
+      name: generateAvatar(),
+    },
     text: shuffle(comments)
       .slice(0, getRandomInt(1, 3))
       .join(` `),
@@ -73,6 +106,7 @@ const generateComments = (count, comments) => (
 const generateOffers = (count, titles, categories, setences, comments) => {
   return Array(count).fill().map(() => ({
     id: getUniqId(),
+    createdDate: getItemCreatedDate(),
     category: getCategories(categories),
     description: getDescription(setences),
     picture: getPictureFileName(),
