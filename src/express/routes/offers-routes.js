@@ -14,7 +14,7 @@ module.exports = (parentRouter, offerDataService) => {
 
     const offer = await offerDataService.findOne(offerId);
 
-    res.render(`ticket-edit`, offer);
+    res.render(`ticket-edit`, {offer});
   });
   offersRouter.get(`/category/:id`, (req, res) => res.render(`category`));
 };
