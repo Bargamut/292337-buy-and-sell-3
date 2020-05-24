@@ -2,11 +2,10 @@
 
 const {Router} = require(`express`);
 
-const {getMockData} = require(`../lib/get-mock-data`);
-
 const offer = require(`./offer`);
 const category = require(`./category`);
 const search = require(`./search`);
+const {getMockData} = require(`../lib/get-mock-data`);
 
 const {
   CategoryService,
@@ -15,15 +14,28 @@ const {
   SearchService,
 } = require(`../data-service`);
 
-
+const categoryService = new CategoryService();
+const searchService = new SearchService();
+const offerService = new OfferService();
+const commentService = new CommentService();
 const router = new Router();
 
-(async () => {
-  const mockData = await getMockData();
+let mockData = null;
 
-  category(router, new CategoryService(mockData));
-  offer(router, new OfferService(mockData), new CommentService());
-  search(router, new SearchService(mockData));
-})();
+router.use(`/`, async (req, res, next) => {
+  if (!mockData) {
+    mockData = await getMockData();
+
+    categoryService.offers = mockData;
+    searchService.offers = mockData;
+    offerService.offers = mockData;
+  }
+
+  next();
+});
+
+category(router, categoryService);
+search(router, searchService);
+offer(router, offerService, commentService);
 
 module.exports = router;

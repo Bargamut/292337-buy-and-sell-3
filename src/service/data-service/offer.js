@@ -5,8 +5,16 @@ const {nanoid} = require(`nanoid`);
 const {MAX_ID_LENGTH} = require(`../../constants`);
 
 class OfferService {
-  constructor(offers) {
-    this._offers = offers;
+  constructor() {
+    this._offers = null;
+  }
+
+  set offers(data) {
+    this._offers = data;
+  }
+
+  get offers() {
+    return this._offers;
   }
 
   create(offer) {
@@ -48,4 +56,3 @@ class OfferService {
 }
 
 module.exports = OfferService;
-

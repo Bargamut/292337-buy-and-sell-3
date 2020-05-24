@@ -1,8 +1,16 @@
 'use strict';
 
 class CategoryService {
-  constructor(offers) {
-    this._offers = offers;
+  constructor() {
+    this._offers = null;
+  }
+
+  set offers(data) {
+    this._offers = data;
+  }
+
+  get offers() {
+    return this._offers;
   }
 
   findAll() {
