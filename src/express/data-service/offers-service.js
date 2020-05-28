@@ -23,6 +23,10 @@ class OfferDataService {
     return await request(`${this._baseUrl}/api/offers/${offerId}`, {json: true});
   }
 
+  async findBy(query) {
+    return await request(`${this._baseUrl}/api/search?query=${encodeURI(query)}`, {json: true});
+  }
+
   async create(data) {
     return await request.post(
         `${this._baseUrl}/api/offers/`,
