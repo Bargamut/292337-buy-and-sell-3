@@ -22,6 +22,14 @@ class OfferDataService {
   async findOne(offerId) {
     return await request(`${this._baseUrl}/api/offers/${offerId}`, {json: true});
   }
+
+  async create(data) {
+    return await request.post(
+        `${this._baseUrl}/api/offers/`,
+        {
+          json: data,
+        });
+  }
 }
 
 module.exports = OfferDataService;
