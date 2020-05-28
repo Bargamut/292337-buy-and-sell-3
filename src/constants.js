@@ -20,6 +20,9 @@ const MAX_ID_LENGTH = 6;
 
 const MOCK_FILE_NAME = `mocks.json`;
 
+const MAX_FILENAME_LENGTH = 6;
+const ALLOWED_FILE_TYPES = [`image/jpeg`, `image/png`];
+
 module.exports = {
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
@@ -28,4 +31,6 @@ module.exports = {
   API_PREFIX_PATH,
   MAX_ID_LENGTH,
   MOCK_FILE_NAME,
+  MAX_FILENAME_LENGTH,
+  ALLOWED_FILE_TYPES,
 };
