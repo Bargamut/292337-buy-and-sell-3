@@ -4,6 +4,8 @@ const {Router} = require(`express`);
 
 const mainRouter = new Router();
 
+const MAX_ITEMS_IN_LIST = 8;
+
 module.exports = (parentRouter, offerDataService) => {
   parentRouter.use(`/`, mainRouter);
 
@@ -13,12 +15,12 @@ module.exports = (parentRouter, offerDataService) => {
     const newestOffers = [...offers].sort((a, b) => b.date - a.date);
     const mostCommentedOffers = [...offers].sort((a, b) => b.comments.length - a.comments.length);
 
-    if (newestOffers.length > 8) {
-      newestOffers.length = 8;
+    if (newestOffers.length > MAX_ITEMS_IN_LIST) {
+      newestOffers.length = MAX_ITEMS_IN_LIST;
     }
 
-    if (mostCommentedOffers.length > 8) {
-      mostCommentedOffers.length = 8;
+    if (mostCommentedOffers.length > MAX_ITEMS_IN_LIST) {
+      mostCommentedOffers.length = MAX_ITEMS_IN_LIST;
     }
 
     res.render(`main`, {newestOffers, mostCommentedOffers});
@@ -34,8 +36,8 @@ module.exports = (parentRouter, offerDataService) => {
 
     const newestOffers = [...offers].sort((a, b) => b.date - a.date);
 
-    if (newestOffers.length > 8) {
-      newestOffers.length = 8;
+    if (newestOffers.length > MAX_ITEMS_IN_LIST) {
+      newestOffers.length = MAX_ITEMS_IN_LIST;
     }
 
     res.render(`search-result`, {searchResult, newestOffers});
