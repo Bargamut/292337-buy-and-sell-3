@@ -8,9 +8,9 @@
     "test::rest": "LOG_LEVEL=debug jest --rootDir=src/service/",
     "eslint": "eslint --ext .js src/",
     "start": "node ./src/service/service.js",
-    "server": "LOG_LEVEL=error nodemon ./src/service/service.js --server",
-    "server::debug": "LOG_LEVEL=debug nodemon ./src/service/service.js --server",
-    "start-front-server": "nodemon ./src/express/index.js"
+    "server": "LOG_LEVEL=error nodemon --watch ./src/service/ ./src/service/service.js --server",
+    "server::debug": "LOG_LEVEL=debug nodemon --watch ./src/service/ ./src/service/service.js --server",
+    "start-front-server": "nodemon --watch ./src/express/ ./src/express/index.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "eslint": "6.8.0",
     "eslint-config-htmlacademy": "0.5.2",
     "jest": "26.0.1",
+    "luxon": "1.24.1",
     "nodemon": "2.0.3",
     "pino-pretty": "4.0.0",
     "supertest": "4.0.2"
@@ -37,8 +38,12 @@
   "dependencies": {
     "chalk": "4.0.0",
     "express": "4.17.1",
+    "express-formidable": "1.2.0",
+    "formidable": "2.0.0-canary.20200504.1",
     "nanoid": "3.1.7",
     "pino": "6.2.1",
-    "pug": "2.0.4"
+    "pug": "2.0.4",
+    "request": "2.88.2",
+    "request-promise-native": "1.0.8"
   }
 }

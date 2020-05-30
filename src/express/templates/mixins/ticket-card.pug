@@ -1,0 +1,16 @@
+mixin ticketCard(item)
+  .ticket-card.ticket-card--color01
+    .ticket-card__img
+      img(src=`/img/${item.picture}` srcset=`/img/blank@2x.png 2x` alt='Изображение товара')
+    .ticket-card__info
+      span.ticket-card__label #{item.type === `buy` ? `Куплю` : `Продам`}
+      .ticket-card__categories
+        each category in item.category
+          a(href='#') #{category}
+      .ticket-card__header
+        h3.ticket-card__title
+          a(href=`/offers/${item.id}`) #{item.title}
+        p.ticket-card__price
+          span.js-sum #{item.sum} ₽
+      .ticket-card__desc
+        p #{item.description}

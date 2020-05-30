@@ -12,9 +12,9 @@ GET http://localhost:8080/my/comments HTTP/1.1
 ###
 GET http://localhost:8080/offers/add HTTP/1.1
 ###
-GET http://localhost:8080/offers/1 HTTP/1.1
+GET http://localhost:8080/offers/8-ISnn HTTP/1.1
 ###
-GET http://localhost:8080/offers/edit/1 HTTP/1.1
+GET http://localhost:8080/offers/edit/8-ISnn HTTP/1.1
 ###
 GET http://localhost:8080/offers/category/1 HTTP/1.1
 ###
